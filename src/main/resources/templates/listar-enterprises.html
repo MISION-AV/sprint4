@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head">
+
+</head>
+<body>
+<header th:replace="template :: header"></header>
+
+<div class="container">
+    <h1 th:text="${titulo}"></h1>
+</div>
+
+<div class="container">
+
+    <a class="btn btn-primary btn-sm" title="Crear nuevo registro" th:text="'Nueva Empresa'"
+       th:href="@{/enterprises/new}">
+    </a>
+
+    <table class="table">
+
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Dirección<th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!-- enterprises = @GetMapping("/enterprises")-->
+        <tr th:each="ent: ${enterprises}">
+            <td scope="row" th:text="${ent.id}"></td>
+            <td th:text="${ent.name}"></td>
+            <td th:text="${ent.document}"></td>
+            <td th:text="${ent.phone}"></td>
+            <td th:text="${ent.address}"></td>
+            <td>
+                <a class="btn btn-success btn-sm" th:href="@{/enterprises/edit/}+${ent.id}"
+                   title="Editar registro" th:text="'Edit'"</a>
+            </td>
+            <td>
+                <a class="btn btn-danger btn-sm" th:href="@{/enterprises/delete/}+${ent.id}"
+                   title="Borrar registro" th:text="'Delete'"
+                   onclick="return confirm('Deseas borrar esta empresa?')"
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<footer th:replace="template :: footer"></footer>
+
+</body>
+</html>
